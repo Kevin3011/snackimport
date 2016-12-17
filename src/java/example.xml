@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+   
+    
+    <package name="home" namespace="/" extends="struts-default">
+        <action name="Home" class="controller.client.HomeAction" method="start">
+            <result>/jsp/Home.jsp</result>
+        </action>
+
+        <action name="About" class="controller.client.AboutAction" method="start">
+            <result>/jsp/About.jsp</result>
+        </action>
+
+        <action name="Contact" class="controller.client.ContactAction" method="start">
+            <result>/jsp/Contact.jsp</result>
+        </action>
+    </package>
+    
+    
+    
+    <package name="gallery" namespace="/Gallery" extends="struts-default">
+        <action name="*" class="controller.client.GalleryAction" method="getGalleryList">
+            <param name="param1">{1}</param>
+            <result>/jsp/Gallery.jsp</result>
+        </action>
+    </package>
+    
+    <package name="admin" namespace="/Admin" extends="struts-default">
+        <action name="Login">
+            <result>/dashboard/admin.jsp</result>
+        </action>
+        <action name="CMS" class="controller.admin.CmsAction">
+            <result>/dashboard/cms.jsp</result>
+        </action>    
+    </package>
+    
+    <package name="adminapi" namespace="/adminAPI" extends="json-default">
+        <action name="addCategory"
+                    class="controller.admin.api.AddCategoryAction">
+                <result type="json"></result>
+        </action>
+        <action name="deleteCategory"
+                    class="controller.admin.api.DeleteCategoryAction">
+                <result type="json"></result>
+        </action>
+
+    </package>
+    
+        <package name="ajax" namespace="/" extends="json-default">
+            <action name="testAjax"
+                    class="controller.testAjax" 
+                    method="actionStart">
+                <result name="success" type="json">
+                    
+                </result>
+            </action>
+        </package>
+</struts> 
