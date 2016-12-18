@@ -22,6 +22,7 @@ extends ActionSupport {
     private List<GalleryBean> listGallery;
     private List<String> listCategory;
     private MasterDAO db;
+    private String statusReport;
 
     public String getCategoryName() {
         return this.categoryName;
@@ -51,6 +52,12 @@ extends ActionSupport {
         this.db = db;
     }
 
+    public String getStatusReport() {
+        return statusReport;
+    }
+    
+    
+
     public String getGalleryList() {
         this.setDb(new MasterDAO());
         Map parameters = ActionContext.getContext().getParameters();
@@ -59,13 +66,8 @@ extends ActionSupport {
         if (cat.matches("[a-zA-Z]+") && cat.length() > 2) {
             this.listGallery = this.db.getGalleryMenuDAO().getData(cat);
             this.setCategoryName(cat);
+            statusReport = "success";
         }
-        try {
-            return "success";
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-            return "failed";
-        }
+        return "success";
     }
 }

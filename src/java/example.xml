@@ -48,7 +48,14 @@
                     class="controller.admin.api.DeleteCategoryAction">
                 <result type="json"></result>
         </action>
-
+        <action name="addMenu"
+                    class="controller.admin.api.AddMenuAction">
+                <result type="json"></result>
+        </action>
+        <action name="deleteMenu"
+                    class="controller.admin.api.DeleteMenuAction">
+                <result type="json"></result>
+        </action>
     </package>
     
         <package name="ajax" namespace="/" extends="json-default">

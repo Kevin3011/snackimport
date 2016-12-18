@@ -16,6 +16,7 @@ import model.dao.MasterDAO;
 public class AboutAction extends ActionSupport {
     List<String> listCategory;
     MasterDAO db;
+    String statusReport;
 
     public List<String> getListCategory() {
         return this.listCategory;
@@ -29,15 +30,23 @@ public class AboutAction extends ActionSupport {
         this.db = db;
     }
 
+    public String getStatusReport() {
+        return statusReport;
+    }
+
+    
     public String start() {
         this.setDb(new MasterDAO());
         try {
             this.listCategory = this.db.getGalleryCategoryDAO().getName();
-            return "success";
+            statusReport = "success";
         }
+        
         catch (Exception ex) {
             ex.printStackTrace();
-            return "failed";
+            statusReport = "failed";
         }
+        return "success";
+    
     }
 }

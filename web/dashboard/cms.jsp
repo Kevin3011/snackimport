@@ -44,8 +44,53 @@
                     });
                 });
                 
-                
-                
+                    
+                $("#formAddMenu").ajaxForm({
+                     beforeSend: function()
+                    {
+                        $("#bar-container").show();
+                        $("#bar").width('0%');
+                        
+                    },
+                    uploadProgress: function(event, position, total, percentComplete)
+                    {
+                        $("#bar").width(percentComplete+'%');
+                        
+                    },
+                    success: function(response)
+                    {
+                        $("#bar").width('100%');
+                        alert(response.statusReport);
+                        $("#bar-container").hide();
+                        $("#bar").width('0%');
+                        location.reload();
+                       
+                    }        
+        
+                });
+                 $("#formAddMenu").ajaxForm({
+                     beforeSend: function()
+                    {
+                        $("#bar-container").show();
+                        $("#bar").width('0%');
+                        
+                    },
+                    uploadProgress: function(event, position, total, percentComplete)
+                    {
+                        $("#bar").width(percentComplete+'%');
+                        
+                    },
+                    success: function(response)
+                    {
+                        $("#bar").width('100%');
+                        alert(response.statusReport);
+                        $("#bar-container").hide();
+                        $("#bar").width('0%');
+                        location.reload();
+                       
+                    }        
+        
+                });
                 
                 $("#formAddCategory").ajaxForm({
                      beforeSend: function()
@@ -65,6 +110,30 @@
                         alert(response.statusReport);
                         $("#bar-container").hide();
                         $("#bar").width('0%');
+                        location.reload();
+                       
+                    }        
+        
+                });
+                $("#formDeleteCategory").ajaxForm({
+                     beforeSend: function()
+                    {
+                        $("#bar-container").show();
+                        $("#bar").width('0%');
+                        
+                    },
+                    uploadProgress: function(event, position, total, percentComplete)
+                    {
+                        $("#bar").width(percentComplete+'%');
+                        
+                    },
+                    success: function(response)
+                    {
+                        $("#bar").width('100%');
+                        alert(response.statusReport);
+                        $("#bar-container").hide();
+                        $("#bar").width('0%');
+                        location.reload();
                        
                     }        
         
@@ -76,6 +145,9 @@
     <body>
     <div id="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div id="bar-container" class="progress progress-striped active">
+                    <div id="bar" class="progress-bar" style="width: 0%"></div>
+            </div>
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -122,9 +194,6 @@
                      <li class="dropdown user-dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Steve Miller<b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                            <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
-                            <li class="divider"></li>
                             <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
                         </ul>
                     </li>
@@ -136,15 +205,11 @@
 
            
             <div class="row">
-                <div id="bar-container" class="progress progress-striped active">
-                    <div id="bar" class="progress-bar" style="width: 0%"></div>
-                </div>
-                <div class="col-lg-6">
-                    <h2>Add / Remove Menu</h2>
-                           
+               <div class="col-lg-6">
+                    <h2>Add Menu</h2>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                        <s:form action="addCategory" namespace="/adminAPI" method="post" enctype="multipart/form-data" id="formAddMenu">
+                        <s:form action="addMenu" namespace="/adminAPI" method="post" enctype="multipart/form-data" id="formAddMenu">
                          <div class="form-group">
                                     <label>Categories</label>
                                     <select class="form-control" name="categoryName">
@@ -161,17 +226,22 @@
                                 </div>
                                 <div class="form-group">
                                     <label>File input</label>
-                                    <input type="file" name="imgFile">
+                                    <input type="file" name="imgFile" accept="image/*">
                                 </div>
 
                                 <button type="submit" class="btn btn-default">Add Menu</button>
                         </s:form>
                         </div>
-                        <div class="panel-body">
-                            <form role="form">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Remove Menu</h2>
+                    <div class="panel panel-default">
+                       <div class="panel-body">
+                            <s:form action="deleteMenu" namespace="/adminAPI" method="post" enctype="multipart/form-data" id="formDeleteMenu">
                                 <div class="form-group">
                                     <label>Categories</label>
-                                    <select class="form-control" id="categoryList">
+                                    <select class="form-control" id="categoryList" name="categoryName">
                                         <option value="" disabled selected hidden>-- Category Name --</option>
                                         <s:iterator value="listCategory">
                                                 <option value="<s:property/>"><s:property/></option>
@@ -180,16 +250,24 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Menu</label>
-                                    <select class="form-control" id="menuList">
+                                    <select class="form-control" id="menuList" name="menuName">
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-default">Delete Menu</button>
-                            </form>
+                            </s:form>
                         </div>
                     </div>
                 </div>
+            </div>  
+                
+                
+                
+                
+                
+                
+            <div class="row">
                 <div class="col-lg-6">
-                    <h2>Add / Remove Category</h2>
+                    <h2>Add Category</h2>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <s:form action="addCategory" namespace="/adminAPI" method="post" enctype="multipart/form-data" id="formAddCategory">
@@ -200,12 +278,16 @@
                                 <button type="submit" class="btn btn-default">Add Category</button>
                             </s:form>
                         </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Remove Category</h2>
+                    <div class="panel panel-default">
                         <div class="panel-body">
                             <s:form action="deleteCategory" namespace="/adminAPI" method="post" enctype="multipart/form-data" id="formDeleteCategory">
-                            
                                 <div class="form-group">
                                     <label>Remaining Categories</label>
-                                    <select class="form-control">
+                                    <select name="categoryName" class="form-control">
                                         <option value="" disabled selected hidden>-- Category Name --</option>
                                             <s:iterator value="listCategory">
                                                 <option value="<s:property/>"><s:property/></option>
@@ -216,6 +298,8 @@
                             </s:form>
                         </div>
                     </div>
+                    
+                    
                 </div>
             </div>
            <div class="row">

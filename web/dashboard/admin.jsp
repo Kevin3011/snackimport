@@ -41,15 +41,14 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul id="active" class="nav navbar-nav side-nav">
-                    <li class="selected"><a href="index.html"><i class="fa fa-bullseye"></i> Dashboard</a></li>
+                    <li class="selected"><a href="#"><i class="fa fa-bullseye"></i> Dashboard</a></li>
                     <li><a href="CMS"><i class="fa fa-list-ol"></i> Content Management</a></li>
                     <li><a href="About"><i class="fa fa-list-ol"></i> About Us</a></li>
                     <li><a href="Contact"><i class="fa fa-list-ul"></i> Contact Us</a></li>
-                    <li><a href="portfolio.html"><i class="fa fa-tasks"></i> Portfolio</a></li>
                     <li><a href="blog.html"><i class="fa fa-globe"></i> Blog</a></li>
                     <li><a href="signup.html"><i class="fa fa-list-ol"></i> SignUp</a></li>
                     <li><a href="register.html"><i class="fa fa-font"></i> Register</a></li>
-                    <li><a href="timeline.html"><i class="fa fa-font"></i> Timeline</a></li>
+                    
                     
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-user">
