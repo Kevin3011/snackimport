@@ -64,9 +64,6 @@ public class GalleryCategoryDAO {
         return "failed";
     }
 
-    /*
-     * WARNING - Removed try catching itself - possible behaviour change.
-     */
     public String editName(String nameAfter, String nameBefore) {
         PreparedStatement pstmt = null;
         int rowCount = 0;

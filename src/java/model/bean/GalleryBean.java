@@ -13,7 +13,25 @@ public class GalleryBean {
     String imgPath;
     String title;
     String price;
+    String category;
+    String isHotProduct;
 
+    public String getIsHotProduct() {
+        return isHotProduct;
+    }
+
+    public void setIsHotProduct(String isHotProduct) {
+        this.isHotProduct = isHotProduct;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+    
     public String getImgPath() {
         return imgPath;
     }
@@ -37,6 +55,4 @@ public class GalleryBean {
     public void setPrice(String price) {
         this.price = price;
     }
-    
-    
 }
