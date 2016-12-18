@@ -28,30 +28,16 @@ extends ActionSupport {
         return this.categoryName;
     }
 
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
+   
     public List<String> getListCategory() {
         return this.listCategory;
     }
 
-    public void setListCategory(List<String> listCategory) {
-        this.listCategory = listCategory;
-    }
-
+   
     public List<GalleryBean> getListGallery() {
         return this.listGallery;
     }
-
-    public void setListGallery(List<GalleryBean> listGallery) {
-        this.listGallery = listGallery;
-    }
-
-    public void setDb(MasterDAO db) {
-        this.db = db;
-    }
-
+    
     public String getStatusReport() {
         return statusReport;
     }
@@ -59,13 +45,18 @@ extends ActionSupport {
     
 
     public String getGalleryList() {
-        this.setDb(new MasterDAO());
+        db = new MasterDAO();
         Map parameters = ActionContext.getContext().getParameters();
         String cat = parameters.get("param1").toString();
-        this.listCategory = this.db.getGalleryCategoryDAO().getName();
+        listCategory = db.getGalleryCategoryDAO().getName();
         if (cat.matches("[a-zA-Z]+") && cat.length() > 2) {
-            this.listGallery = this.db.getGalleryMenuDAO().getData(cat);
-            this.setCategoryName(cat);
+            listGallery = db.getGalleryMenuDAO().getData(cat);
+            if(!listGallery.isEmpty())
+            {
+                categoryName = cat;
+            }else{
+                categoryName = "Unavailable";
+            }
             statusReport = "success";
         }
         return "success";

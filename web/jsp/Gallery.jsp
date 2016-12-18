@@ -77,7 +77,7 @@
 				<div class="gallery-grids">
 					    <s:iterator value="listGallery">
                                         	<div class="gallery-grid">
-                                                    <a class="b-link-stripe b-animate-go thickbox" href="<s:property value="imgPath"/>" rel="<s:property value="title"/>">
+                                                    <a class="b-link-stripe b-animate-go thickbox" href="<s:property value="imgPath"/>" rel="<s:property value="name"/>">
                                                         <img alt=" " class="img-responsive" src="<s:property value="imgPath"/>">
                                                     </a> 
                                                 </div>

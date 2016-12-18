@@ -6,6 +6,7 @@
 package controller.admin.api;
 
 import com.opensymphony.xwork2.ActionSupport;
+import model.dao.MasterDAO;
 
 /**
  *
@@ -15,6 +16,7 @@ public class DeleteMenuAction extends ActionSupport {
     String menuName;
     String categoryName;
     String statusReport;
+    MasterDAO db;
 
     public void setMenuName(String menuName) {
         this.menuName = menuName;
@@ -28,15 +30,18 @@ public class DeleteMenuAction extends ActionSupport {
         return statusReport;
     }
 
-    @Override
-    public String execute() throws Exception {
-    
-        if(menuName!=null && categoryName !=null){
-            statusReport = "success";
-        }else{
-            statusReport = "false";
+     public String execute() {
+        db = new MasterDAO();
+        if (this.categoryName != null) {
+            if (!this.categoryName.isEmpty()) {
+                statusReport = db.getGalleryMenuDAO().deleteMenu(menuName);
+            } else {
+                statusReport = ("failed");
+            }
+        } else {
+            statusReport = ("failed");
         }
-        return SUCCESS;
+        return "success";
     }
     
     

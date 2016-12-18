@@ -14,7 +14,7 @@ import java.util.List;
  * @author Kevin
  */
 public class testAjax extends ActionSupport{
-     String ajaxRes;
+    String ajaxRes;
     String ajaxRes2;
     String categoryName;
     List<String> listAjax = new ArrayList<String>();

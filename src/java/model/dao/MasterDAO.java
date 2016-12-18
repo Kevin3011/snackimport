@@ -12,13 +12,18 @@ package model.dao;
 public class MasterDAO {
     GalleryCategoryDAO galleryCategoryDAO;
     GalleryMenuDAO galleryMenuDAO;
-
+    AdminDAO adminDAO;
+    
     public GalleryCategoryDAO getGalleryCategoryDAO() {
         return new GalleryCategoryDAO();
     }
 
     public GalleryMenuDAO getGalleryMenuDAO() {
         return new GalleryMenuDAO();
+    }
+
+    public AdminDAO getAdminDAO() {
+        return new AdminDAO();
     }
     
     

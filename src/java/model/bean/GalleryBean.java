@@ -11,7 +11,7 @@ package model.bean;
  */
 public class GalleryBean {
     String imgPath;
-    String title;
+    String name;
     String price;
     String category;
     String isHotProduct;
@@ -40,12 +40,12 @@ public class GalleryBean {
         this.imgPath = imgPath;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String title) {
+        this.name = title;
     }
 
     public String getPrice() {

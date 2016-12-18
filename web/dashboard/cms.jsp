@@ -31,14 +31,14 @@
                                                 .end();
                     $.ajax({
                         type : "POST",
-                        url : "../testAjax",
+                        url : "../adminAPI/getMenu",
                         data : "categoryName="+ val,
                         dataType : "json",
                         success : function(result) {
-                            $.each(result.listAjax, function(k, v){
+                            $.each(result.categoryList, function(k, v){
                                 $('#menuList')
                                   .append($("<option></option>")
-                                             .attr("value",k).text(v));
+                                             .attr("value",v).text(v));
                             });
                         }
                     });
@@ -93,6 +93,30 @@
                 });
                 
                 $("#formAddCategory").ajaxForm({
+                     beforeSend: function()
+                    {
+                        $("#bar-container").show();
+                        $("#bar").width('0%');
+                        
+                    },
+                    uploadProgress: function(event, position, total, percentComplete)
+                    {
+                        $("#bar").width(percentComplete+'%');
+                        
+                    },
+                    success: function(response)
+                    {
+                        $("#bar").width('100%');
+                        alert(response.statusReport);
+                        $("#bar-container").hide();
+                        $("#bar").width('0%');
+                        location.reload();
+                       
+                    }        
+        
+                });
+                
+                $("#formDeleteMenu").ajaxForm({
                      beforeSend: function()
                     {
                         $("#bar-container").show();
@@ -223,6 +247,10 @@
                                     <label>Add New Menu</label>
                                     <input class="form-control" name="menuName" placeholder="Enter text">
                                     <p class="help-block">menu is added automatically to the categories you chose.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Add Price</label>
+                                    <input class="form-control" name="menuPrice" placeholder="Enter value" type="number">
                                 </div>
                                 <div class="form-group">
                                     <label>File input</label>

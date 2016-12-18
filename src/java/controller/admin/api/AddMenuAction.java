@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.bean.GalleryBean;
+import model.dao.MasterDAO;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -22,46 +24,34 @@ import org.apache.commons.io.FileUtils;
 public class AddMenuAction extends ActionSupport {
     String categoryName;
     String menuName;
+    String menuPrice;
     File imgFile;
     String imgFileContentType;
     String imgFileFileName;
     String destinationPath;
     String statusReport;
+    MasterDAO db;
+    GalleryBean galleryBean;
 
-    public String getCategoryName() {
-        return categoryName;
+    public void setMenuPrice(String menuPrice) {
+        this.menuPrice = menuPrice;
     }
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public String getMenuName() {
-        return menuName;
-    }
 
     public void setMenuName(String menuName) {
         this.menuName = menuName;
-    }
-
-    public File getImgFile() {
-        return imgFile;
     }
 
     public void setImgFile(File imgFile) {
         this.imgFile = imgFile;
     }
 
-    public String getImgFileContentType() {
-        return imgFileContentType;
-    }
-
     public void setImgFileContentType(String imgFileContentType) {
         this.imgFileContentType = imgFileContentType;
-    }
-
-    public String getImgFileFileName() {
-        return imgFileFileName;
     }
 
     public void setImgFileFileName(String imgFileFileName) {
@@ -76,16 +66,31 @@ public class AddMenuAction extends ActionSupport {
     
     @Override
     public String execute(){
-        destinationPath = "C:/Users/Kevin/Documents/NetBeansProjects/Univ/SnackImportIndonesia/web/images/uploads/";
+        db = new MasterDAO();
+        galleryBean = new GalleryBean();
+        
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        File img = new File(destinationPath,menuName + "-" + dateFormat.format(date) + ".jpg");
-        try {
-            FileUtils.copyFile(imgFile,img);
-            statusReport = "success";
-        } catch (IOException ex) {
-            Logger.getLogger(AddMenuAction.class.getName()).log(Level.SEVERE, null, ex);
-            statusReport ="failed";
+       
+        destinationPath = "C:/Users/Kevin/Documents/NetBeansProjects/Univ/SnackImportIndonesia/web/images/uploads/";
+        
+        
+        if(menuName != null && categoryName != null & imgFile != null && menuPrice != null){
+            String fileName = menuName + "-" + dateFormat.format(date) + ".jpg";
+            File img = new File(destinationPath,fileName);
+
+            galleryBean.setName(menuName);
+            galleryBean.setCategory(categoryName);
+            galleryBean.setImgPath("images/uploads/"+fileName);
+            galleryBean.setPrice(menuPrice);
+            try {
+                FileUtils.copyFile(imgFile,img);
+                statusReport = db.getGalleryMenuDAO().addMenu(galleryBean);
+
+            } catch (IOException ex) {
+                Logger.getLogger(AddMenuAction.class.getName()).log(Level.SEVERE, null, ex);
+                statusReport ="saving image went wrong!";
+            }
         }
 
         return SUCCESS;

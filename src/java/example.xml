@@ -31,9 +31,26 @@
     </package>
     
     <package name="admin" namespace="/Admin" extends="struts-default">
+
         <action name="Login">
-            <result>/dashboard/admin.jsp</result>
+            <result>/dashboard/login.jsp</result>
         </action>
+         <action name="LogAuc" class="controller.admin.LoginAction">
+            <result name="success" type="redirect">
+                <param name="location">
+                    Home
+                </param >
+                <param name="token">${token}</param>
+           </result>
+            <result name="failed" type="redirect">
+                <param name="location">
+                    Login
+                </param>
+           </result>
+        </action>
+        <action name="Home" class="controller.admin.HomeAction">
+            <result>/dashboard/admin.jsp</result>
+        </action> 
         <action name="CMS" class="controller.admin.CmsAction">
             <result>/dashboard/cms.jsp</result>
         </action>    
@@ -56,6 +73,11 @@
                     class="controller.admin.api.DeleteMenuAction">
                 <result type="json"></result>
         </action>
+        <action name="getMenu"
+                    class="controller.admin.api.GetMenuNameAction">
+                <result type="json"></result>
+        </action>
+        
     </package>
     
         <package name="ajax" namespace="/" extends="json-default">
